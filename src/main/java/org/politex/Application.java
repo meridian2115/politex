@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 
 public class Application {
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("D:\\projects\\tests\\kramer\\test1.txt");
+        File file = new File("src/test/resources/kramer_test1.txt");
         Kramer kramer = new Kramer(file);
     }
 }
