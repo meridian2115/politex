@@ -1,8 +1,8 @@
 package org.politex.models.logic;
 
+import org.politex.models.utils.FileUtils;
+
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 /**
  * Решение системы уравнений 3х3 методом Крамера
@@ -50,7 +50,7 @@ public class Kramer {
      * 2 -6 4 0
     * */
     public Kramer(File file) {
-        double[][] numbers = parseFile(file);
+        double[][] numbers = FileUtils.parseFile(file);
         this.d = calculate(numbers);
         if (this.d == 0) {
             System.out.println("Нет решения");
@@ -60,29 +60,7 @@ public class Kramer {
         this.x2 = calculate(numbers, 1, 4, 3)/d;
         this.x3 = calculate(numbers, 1, 2, 4)/d;
         System.out.println(String.format("x1 = %s, x2 = %s, x3 = %s", x1, x2, x3));
-    }
-
-    private double[][] parseFile(File file) {
-        try {
-            double[][] numbers = new double[3][4];
-            Scanner scanner = new Scanner(file);
-            for (int i=0; i < 3; i++) {
-                String line = scanner.nextLine();
-                String[] values = line.split(" ");
-                for (int j = 0; j < 4; j++) {
-                    try {
-                        numbers[i][j] = Double.parseDouble(values[j]);
-                    } catch (Exception ex) {
-                        System.out.println("Ошибка в данных");
-                        ex.printStackTrace();
-                    }
-                }
-            }
-            return numbers;
-        } catch (FileNotFoundException ex) {
-            System.out.println("Отсутствует файл для подсчета");
-        }
-        return null;
+        System.out.println();
     }
 
     public double calculate(double[][] numbers, int... varArgs){
@@ -106,13 +84,21 @@ public class Kramer {
             }
             System.out.println();
         }
+        String formula = String.format("(%s * %s * %s) + (%s * %s * %s) + (%s * %s * %s) - (%s * %s * %s) - (%s * %s * %s) - (%s * %s * %s)",
+                                                            get(1,1), get(2,2), get(3,3),
+                                                            get(2,1), get(1,3), get(3,2),
+                                                            get(3,1), get(1,2), get(2,3),
+                                                            get(3,1), get(2,2), get(1,3),
+                                                            get(1,1), get(2,3), get(3,2),
+                                                            get(1,2), get(3,3), get(2,1));
+
         double d = get(1,1) * get(2,2) * get(3,3) +
                 get(2,1) * get(1,3) * get(3,2) +
                 get(3,1) * get(1,2) * get(2,3) -
                 get(3,1) * get(2,2) * get(1,3) -
                 get(1,1) * get(2,3) * get(3,2) -
                 get(1,2) * get(3,3) * get(2,1);
-        System.out.println("D = " + d);
+        System.out.println("D = "+ formula + " = " + d);
         System.out.println();
         return d;
     }
