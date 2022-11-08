@@ -51,7 +51,7 @@ public class Gauss {
             }
             if (Math.abs(numbers[i][column]) == 1) {
                 minValue = numbers[i][column];
-                System.out.println("Колонка " + column + " MinValue = " + minValue);
+//                System.out.println("Колонка " + column + " MinValue = " + minValue);
                 return i;
             }
             if (Math.abs(numbers[i][column]) < Math.abs(minValue)) {
@@ -62,7 +62,7 @@ public class Gauss {
         if (countOfZero == numbers.length - 1) {
             return -1;
         }
-        System.out.println("Колонка " + column + " MinValue = " + minValue);
+//        System.out.println("Колонка " + column + " MinValue = " + minValue);
         return index;
     }
 

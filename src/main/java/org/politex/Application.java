@@ -14,15 +14,13 @@ public class Application {
             System.out.println("1. Метод Крамера с тремя неизвестными");
             System.out.println("2. Метод Гаусса ");
             System.out.println("0. Выход ");
-            String taskNum = ""; //= scanner.nextLine();
+            String taskNum = scanner.nextLine();
             if (taskNum.equals("0")) {
                 break;
             }
-            taskNum = "2";
 
             System.out.println("Введите имя txt файла для расчета ");
-            String fileName;// = scanner.nextLine();
-            fileName = "gauss_test1";
+            String fileName = scanner.nextLine();
             File file = new File(String.format("src/test/resources/%s.txt", fileName));
 
             switch (taskNum){
@@ -37,6 +35,5 @@ public class Application {
             }
             break;
         }
-
     }
 }
